@@ -3,4 +3,9 @@
 
     <include file="it/nexbit/cuba/security/userprofile/screens.xml"/>
 
+    <screen id="settings"
+            template="it/nexbit/cuba/security/userprofile/web/screens/nexbit-settings-window.xml">
+        <param name="changeThemeEnabled" value="false"/>
+    </screen>
+
 </screen-config>

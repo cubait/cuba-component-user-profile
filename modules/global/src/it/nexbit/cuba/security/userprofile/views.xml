@@ -1,4 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
-
+    <view class="com.haulmont.cuba.security.entity.User"
+          extends="_minimal"
+          name="user.profile">
+        <property name="loginLowerCase"/>
+        <property name="firstName"/>
+        <property name="lastName"/>
+        <property name="middleName"/>
+        <property name="position"/>
+        <property name="email"/>
+        <property name="language"/>
+        <property name="timeZone"/>
+        <property name="timeZoneAuto"/>
+        <property name="changePasswordAtNextLogon"/>
+        <property fetch="JOIN"
+                  name="group"
+                  view="_minimal"/>
+        <property fetch="JOIN"
+                  name="userRoles">
+            <property fetch="JOIN"
+                      name="role"
+                      view="_minimal"/>
+        </property>
+    </view>
+    <view class="com.haulmont.cuba.security.entity.User"
+          name="user.profileUpdate">
+        <property name="firstName"/>
+        <property name="lastName"/>
+        <property name="middleName"/>
+        <property name="position"/>
+        <property name="email"/>
+        <property name="language"/>
+        <property name="timeZone"/>
+        <property name="timeZoneAuto"/>
+        <property name="name"/>
+    </view>
 </views>
