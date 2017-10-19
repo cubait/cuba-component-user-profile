@@ -36,7 +36,7 @@ This application component gives the following features once added to a CUBA pro
 | ---------------- | -------------- |
 | 6.6.4            | 0.1.x          |
 
-The latest version is: `0.1.0`
+The latest version is: `0.1.1`
 
 Add custom application component to your project:
 
