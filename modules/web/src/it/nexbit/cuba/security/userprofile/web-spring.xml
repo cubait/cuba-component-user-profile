@@ -8,7 +8,7 @@
     <!-- Annotation-based beans -->
     <context:component-scan base-package="it.nexbit.cuba.security.userprofile"/>
 
-    <bean id="extsec_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
+    <bean id="nxsecup_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
         <property name="serverSelector" ref="cuba_ServerSelector"/>
         <property name="remoteServices">
             <map>
