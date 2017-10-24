@@ -10,8 +10,8 @@ import it.nexbit.cuba.security.userprofile.config.UserProfileConfig;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import javax.validation.ValidationException;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.ValidationException;
 
 @Service(UserProfileService.NAME)
 public class UserProfileServiceBean implements UserProfileService {
@@ -77,10 +77,12 @@ public class UserProfileServiceBean implements UserProfileService {
      *
      * @param user  a {@code User} entity to set in the current {@code UserSession}
      * @throws ValidationException  if bean validation fails for {@code user}
+     * @return the updated user, if any (may return null)
      */
     @Override
-    public void updateProfile(@NotNull User user) throws ValidationException {
+    public User updateProfile(@NotNull User user) {
         userProfileHelper.updateProfile(user, userProfileConfig.getDefaultViewForUserProfileUpdate());
+        return getProfile();
     }
 
     /**
@@ -102,9 +104,11 @@ public class UserProfileServiceBean implements UserProfileService {
      * @param user  a {@code User} entity to set in the current {@code UserSession}
      * @param viewName  the view used to update the user entity. Only the properties included
      *                  in this view will be updated in the original entity.
+     * @return the updated user, if any (may return null)
      */
     @Override
-    public void updateProfile(@NotNull User user, @NotNull String viewName) throws ValidationException {
+    public User updateProfile(@NotNull User user, @NotNull String viewName) {
         userProfileHelper.updateProfile(user, viewName);
+        return getProfile();
     }
 }

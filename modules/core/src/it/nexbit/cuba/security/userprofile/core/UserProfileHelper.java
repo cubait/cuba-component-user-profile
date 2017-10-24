@@ -19,13 +19,9 @@ import com.haulmont.cuba.security.global.UserSession;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.validation.ConstraintViolation;
-import javax.validation.ElementKind;
-import javax.validation.Path;
-import javax.validation.Validator;
+import javax.validation.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
-import javax.xml.bind.ValidationException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -99,7 +95,7 @@ public class UserProfileHelper {
      * @param user      a {@code User} entity to set in the current {@code UserSession}
      * @param viewName
      */
-    public void updateProfile(@NotNull User user, @NotNull String viewName) throws ValidationException {
+    public void updateProfile(@NotNull User user, @NotNull String viewName) {
         checkNotNullArgument(user, "user must not be null");
         checkNotNullArgument(viewName, "viewName must not be null");
         final UserSession userSession = getUserSession();

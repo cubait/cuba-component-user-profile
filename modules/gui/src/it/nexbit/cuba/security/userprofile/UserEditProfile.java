@@ -18,7 +18,7 @@ import com.haulmont.cuba.security.global.UserSession;
 import it.nexbit.cuba.security.userprofile.app.UserProfileService;
 
 import javax.inject.Inject;
-import javax.xml.bind.ValidationException;
+import javax.validation.ValidationException;
 import java.util.Map;
 
 /**

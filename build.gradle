@@ -157,6 +157,7 @@ configure(webModule) {
     dependencies {
         provided(servletApi)
         compile(guiModule)
+        compile('commons-beanutils:commons-beanutils:1.9.3')
 
     }
     

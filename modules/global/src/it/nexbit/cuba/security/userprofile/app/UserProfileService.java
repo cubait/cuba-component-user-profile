@@ -8,8 +8,8 @@ import com.haulmont.cuba.security.entity.User;
 import it.nexbit.cuba.security.userprofile.config.UserProfileConfig;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.ValidationException;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.ValidationException;
 
 /**
  * Provides methods for getting and updating the user's profile (that is, the {@code User}
@@ -69,9 +69,10 @@ public interface UserProfileService {
      *
      * @param user  a {@code User} entity to set in the current {@code UserSession}
      * @throws ValidationException  if bean validation fails for {@code user}
+     * @return the updated user, if any (may return null)
      */
     @Validated
-    void updateProfile(@NotNull User user) throws ValidationException;
+    User updateProfile(@NotNull User user);
 
     /**
      * Update the user entity in the database, and then set it in the active
@@ -90,7 +91,8 @@ public interface UserProfileService {
      * @param viewName  the view used to update the user entity. Only the properties included
      *                  in this view will be updated in the original entity.
      * @throws ValidationException  if bean validation fails for {@code user}
+     * @return the updated user, if any (may return null)
      */
     @Validated
-    void updateProfile(@NotNull User user, @NotNull String viewName) throws ValidationException;
+    User updateProfile(@NotNull User user, @NotNull String viewName);
 }
