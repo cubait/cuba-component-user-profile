@@ -49,6 +49,8 @@
                   value="+it/nexbit/cuba/security/userprofile/web-permissions.xml"/>
         <property name="cuba.mainMessagePack"
                   value="+it.nexbit.cuba.security.userprofile.web"/>
+        <property name="cuba.restSpringContextConfig"
+                  value="+it/nexbit/cuba/security/userprofile/rest-dispatcher-spring.xml"/>
         <property name="cuba.rest.servicesConfig"
                   value="+it/nexbit/cuba/security/userprofile/rest-services.xml"/>
     </module>
