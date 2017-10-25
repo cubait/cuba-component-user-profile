@@ -38,7 +38,7 @@ requests for updating the user's password
 | ---------------- | -------------- |
 | 6.6.4            | 0.2.x          |
 
-The latest version is: `0.2.0`
+The latest version is: `0.2.1`
 
 Add custom application component to your project:
 
