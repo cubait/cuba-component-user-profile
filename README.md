@@ -6,7 +6,7 @@ This application component gives the following features once added to a CUBA pro
 
 - Provides a `UserProfileService` with methods for getting and updating the details of the current logged in user (what I call the _user profile_)
 - Exposes a new REST API endpoint, called `/rest/nxsecup/v1/userProfile` supporting GET (`getProfile`)
-and POST (updateProfile) requests, and a `/rest/nxsecup/v1/userProfile/password` endpoint supporting POST
+and PUT (updateProfile) requests, and a `/rest/nxsecup/v1/userProfile/password` endpoint supporting POST
 requests for updating the user's password
 - Adds a `userProfile` screen, and corresponding menu item after the Settings one in the Help main menu
 - Optionally hides the _Change password_ button from the `Settings` screen (because that button is replicated in the `userProfile` screen)
@@ -38,7 +38,7 @@ requests for updating the user's password
 | ---------------- | -------------- |
 | 6.6.4            | 0.2.x          |
 
-The latest version is: `0.2.1`
+The latest version is: `0.2.2`
 
 Add custom application component to your project:
 
