@@ -41,7 +41,7 @@ public class UserProfileController {
      * @param userJson  the profile data to update, as JSON string
      * @return the updated profile as JSON
      */
-    @PostMapping
+    @PutMapping
     public ResponseEntity<String> updateUserProfile(@RequestBody(required = false) String userJson) {
         ServicesControllerManager.ServiceCallResult result =  userProfileControllerManager.updateUserProfile(userJson);
         return buildUserProfileResponse(result);
