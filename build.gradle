@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.6.4'
+    ext.cubaVersion = '6.8.3'
     repositories {
         maven {
             url 'https://repo.cuba-platform.com/content/groups/work'
@@ -30,7 +30,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'it.nexbit.cuba.security.userprofile'
-        version = '0.2.2'
+        version = '0.3.0'
         isSnapshot = false
     }
     tomcat {
@@ -221,7 +221,7 @@ task restart(dependsOn: ['stop', ':nxsecup-core:deploy', ':nxsecup-web:deploy'],
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.4'
+    gradleVersion = '4.3.1'
 }
 
 apply from: 'extra.gradle'
