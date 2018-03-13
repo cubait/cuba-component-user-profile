@@ -191,8 +191,24 @@ public class UserEditProfile extends AbstractWindow {
     }
 
     public interface Companion {
+        /**
+         * Check if the user has been authenticated with a user/password login mechanism (based
+         * on {@code LoginPasswordCredentials} credentials), or with an external one.
+         * Only in the former case the password for the user can be changed by the web client.
+         *
+         * @return {@code true} if the current UserSession was obtained from an external
+         *      authentication provider, {@code false} otherwise
+         */
         Boolean isLoggedInWithExternalAuth();
 
+        /**
+         * Set the updated {@code userSession} in the current {@code VaadinSession} instance, so
+         * that subsequent invocations of {@link UserSessionSource#getUserSession()} will get the
+         * new instance.
+         *
+         * @param userSession the new {@code UserSession} object to set in the current
+         *                    {@code VaadinSession} and propagated in the middleware
+         */
         void pushUserSessionUpdate(UserSession userSession);
     }
 }

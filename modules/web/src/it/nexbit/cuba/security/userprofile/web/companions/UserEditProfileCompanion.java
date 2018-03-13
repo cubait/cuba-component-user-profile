@@ -24,11 +24,15 @@ public class UserEditProfileCompanion implements UserEditProfile.Companion {
     @Override
     public Boolean isLoggedInWithExternalAuth() {
         UserSession userSession = AppBeans.get(UserSession.class);
+        // IMPL NOTE: this check is the same as the one performed in SettingsWindow#init() on line 152
         return ExternalUserCredentials.isLoggedInWithExternalAuth(userSession);
     }
 
     @Override
     public void pushUserSessionUpdate(UserSession userSession) {
+        // IMPL NOTE: this code has been extracted (and adapted) from the WebUserSessionSource
+        //            class.  The original logic is for reading the current UserSession, the
+        //            following one is the same (reversed) logic to force an update.
         if (App.isBound()) {
             VaadinSession.getCurrent().setAttribute(UserSession.class, userSession);
         } else {
