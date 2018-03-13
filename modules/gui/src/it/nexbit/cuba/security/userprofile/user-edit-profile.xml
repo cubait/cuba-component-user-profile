@@ -5,37 +5,43 @@
         datasource="userDs"
         focusComponent="fieldGroup"
         messagesPack="it.nexbit.cuba.security.userprofile">
-    <companions>
-        <web class="it.nexbit.cuba.security.userprofile.web.companions.UserEditProfileCompanion"/>
-    </companions>
     <dsContext>
         <datasource id="userDs"
                     class="com.haulmont.cuba.security.entity.User"
                     view="_local"/>
     </dsContext>
+    <companions>
+        <web class="it.nexbit.cuba.security.userprofile.web.companions.UserEditProfileCompanion"/>
+    </companions>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="buttons"
             spacing="true">
         <groupBox id="groupBox"
                   spacing="true">
-            <scrollBox id="scrollBox" orientation="vertical">
+            <scrollBox id="scrollBox"
+                       orientation="vertical">
                 <fieldGroup id="fieldGroup"
                             datasource="userDs">
-                    <column width="250px">
-                        <field editable="false"
+                    <column id="firstColumn"
+                            width="250px">
+                        <field id="login"
+                               editable="false"
                                property="login"/>
-                        <field property="email"
+                        <field id="email"
+                               property="email"
                                required="true"
                                requiredMessage="msg://profile.emailRequired"/>
-                        <field property="firstName"/>
-                        <field property="lastName"/>
-                        <field property="name"
+                        <field id="firstName" property="firstName"/>
+                        <field id="lastName" property="lastName"/>
+                        <field id="name"
+                               property="name"
                                required="true"
                                requiredMessage="msg://profile.nameRequired"/>
                     </column>
                 </fieldGroup>
-                <grid margin="true,false,false,false"
+                <grid id="grid"
+                      margin="true,false,false,false"
                       spacing="true"
                       width="100%">
                     <columns>
@@ -44,7 +50,8 @@
                     </columns>
                     <rows>
                         <row>
-                            <label align="MIDDLE_LEFT"
+                            <label id="changePasswordLabel"
+                                   align="MIDDLE_LEFT"
                                    value="msg://profile.password"/>
                             <button id="changePasswordBtn"
                                     icon="icons/change-pass.png"/>
@@ -53,10 +60,13 @@
                 </grid>
             </scrollBox>
         </groupBox>
-        <vbox id="buttons" margin="true;false;false;false">
+        <vbox id="buttons"
+              margin="true,false,false,false">
             <buttonsPanel>
-                <button id="okBtn" icon="icons/ok.png"/>
-                <button id="cancelBtn" icon="icons/cancel.png"/>
+                <button id="okBtn"
+                        icon="icons/ok.png"/>
+                <button id="cancelBtn"
+                        icon="icons/cancel.png"/>
             </buttonsPanel>
         </vbox>
     </layout>
