@@ -24,6 +24,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.haulmont.bali.util.Preconditions.checkNotNullArgument;
@@ -163,17 +164,33 @@ public class UserProfileHelper {
         checkNotNullArgument(session, "session must not be null");
         checkNotNullArgument(user, "user must not be null");
         // replace the current security context (if any) with a new one based on new session
-        if (AppContext.getSecurityContext() != null)
+        final SecurityContext securityContext = AppContext.getSecurityContext();
+        if (securityContext != null) {
+            if (securityContext.getSessionId().equals(AppContext.NO_USER_CONTEXT.getSessionId())) {
+                return;
+            }
             AppContext.setSecurityContext(new SecurityContext(session));
+        }
         // update the session object and propagate to the cluster
         session.setUser(user);
         userSessionsAPI.propagate(session.getId());
     }
 
+    /**
+     * Get the current user session, if it is not the system user, or the anonymous user,  or the
+     * special "server" one used in the login mechanism. In these latter cases, it returns
+     * {@code null}.
+     * It uses the UserSessionSource bean, that by default prolongs the session's lifetime in
+     * the cache (it calls {@link UserSessionsAPI#getAndRefresh(UUID)}).
+     *
+     * @return
+     */
     protected UserSession getUserSession() {
         if (userSessionSource.checkCurrentUserSession()) {
             final UserSession userSession = userSessionSource.getUserSession();
-            if (!userSession.isSystem() && !userSession.getId().equals(globalConfig.getAnonymousSessionId())) {
+            if (!userSession.isSystem()
+                    && !userSession.getId().equals(globalConfig.getAnonymousSessionId())
+                    && !userSession.getId().equals(AppContext.NO_USER_CONTEXT.getSessionId())) {
                 return userSession;
             }
         }
