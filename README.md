@@ -1,4 +1,7 @@
 [![license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
+[![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
+[![Generic badge](https://img.shields.io/badge/API%20docs-HERE-orange.svg)][2]
+[![Run in Postman](https://run.pstmn.io/button.svg)][1]
 
 # CUBA User Profile Component
 
@@ -120,9 +123,9 @@ Extend or replace them if the default properties are not suitable for your app.
 If you use **Postman** (and if you don't, you should), then click the following button to import
 a collection with all the requests
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/da701a9750c75da9ab02#?env%5Bsec-user-profile%20TEST%5D=W3sia2V5IjoiYmFzZXVybCIsInZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FwcC9yZXN0IiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0=)
+[![Run in Postman](https://run.pstmn.io/button.svg)][1]
 
-And here is the public documentation URL: [REST API Docs](https://documenter.getpostman.com/view/48162/collection/RW1VqMDm)
+And here is the public documentation URL: [REST API Docs][2]
 
 Every request makes use of the following variables:
 
@@ -220,3 +223,6 @@ If you used **CUBA Studio** to extend the screen, and customised the `fieldGroup
 could face a *duplicated id* error when loading the extended screen. This is due to Studio adding
 back **all** the fields in the `fieldGroup`, usually without the original ids.
 In that case, just open the XML file in your IDE, and edit it manually like outlined above.
+
+[1]: https://app.getpostman.com/run-collection/da701a9750c75da9ab02#?env%5Bsec-user-profile%20TEST%5D=W3sia2V5IjoiYmFzZXVybCIsInZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FwcC9yZXN0IiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0=
+[2]: https://documenter.getpostman.com/view/48162/collection/RW1VqMDm
