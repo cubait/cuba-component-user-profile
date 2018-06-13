@@ -2,6 +2,11 @@
 
 All releases are documented here. This project follows *Semantic Versioning* principles.
 
+## [1.0.0] - 2018-06-13
+
+- Support for CUBA 6.9.0
+- Add EmailValidator to edit user profile screen
+
 ## [0.3.0] - 2018-04-19
 
 - Support for CUBA 6.8.6
