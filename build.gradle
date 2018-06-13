@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.8.6'
+    ext.cubaVersion = '6.9.0'
     repositories {
         maven {
             url 'https://repo.cuba-platform.com/content/groups/work'
@@ -20,7 +20,7 @@ def coreModule = project(':nxsecup-core')
 def guiModule = project(':nxsecup-gui')
 def webModule = project(':nxsecup-web')
 
-def servletApi = 'org.apache.tomcat:tomcat-servlet-api:8.0.26'
+def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 
 def bintrayRepositoryUrl = "https://api.bintray.com/maven/pfurini/cuba-components/user-profile/;publish=1"
 
@@ -30,7 +30,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'it.nexbit.cuba.security.userprofile'
-        version = '0.3.0'
+        version = "1.0.0"
         isSnapshot = false
     }
     tomcat {
@@ -198,10 +198,6 @@ configure(webModule) {
         appJars('nxsecup-global', 'nxsecup-gui', 'nxsecup-web')
     }
 }
-
-
-
-
 
 task undeploy(type: Delete, dependsOn: ':nxsecup-web:cleanConf') {
     delete("$cuba.tomcat.dir/shared")
