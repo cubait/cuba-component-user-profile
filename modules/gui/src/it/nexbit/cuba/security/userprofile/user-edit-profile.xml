@@ -31,7 +31,10 @@
                         <field id="email"
                                property="email"
                                required="true"
-                               requiredMessage="msg://profile.emailRequired"/>
+                               requiredMessage="msg://profile.emailRequired">
+                            <validator
+                                    class="com.haulmont.cuba.gui.components.validators.EmailValidator"/>
+                        </field>
                         <field id="firstName" property="firstName"/>
                         <field id="lastName" property="lastName"/>
                         <field id="name"
