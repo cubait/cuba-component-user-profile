@@ -12,6 +12,7 @@ buildscript {
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0"
     }
 }
 
@@ -219,3 +220,5 @@ task restart(dependsOn: ['stop', ':nxsecup-core:deploy', ':nxsecup-web:deploy'],
 task wrapper(type: Wrapper) {
     gradleVersion = '4.3.1'
 }
+
+apply from: 'publish.gradle';
