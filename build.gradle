@@ -223,5 +223,3 @@ task restart(dependsOn: ['stop', ':nxsecup-core:deploy', ':nxsecup-web:deploy'],
 task wrapper(type: Wrapper) {
     gradleVersion = '4.3.1'
 }
-
-apply from: 'extra.gradle'
