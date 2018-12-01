@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.9.0'
+    ext.cubaVersion = '6.10.4'
     repositories {
         maven {
             url 'https://repo.cuba-platform.com/content/groups/work'
@@ -29,7 +29,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'it.nexbit.cuba.security.userprofile'
-        version = "1.0.0"
+        version = "1.1.0"
         isSnapshot = false
     }
     tomcat {
@@ -65,7 +65,9 @@ configure([globalModule, coreModule, guiModule, webModule]) {
 }
 
 configure(globalModule) {
-    task enhance(type: CubaEnhancing)
+    entitiesEnhancing {
+        main { enabled = true }
+    }
 
     jar {
         manifest {
