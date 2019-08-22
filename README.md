@@ -40,12 +40,6 @@ buildscript {
 }
 ```
 
-Alternatively you can use **CUBA Studio** to add it: just go to the `PROJECT PROPERTIES` section,
-click `Edit`, then click on the cog icon next to the `Repository` field.
-In the dialog that opens, click on `+ Add` and enter `https://dl.bintray.com/pfurini/cuba-components`
-in the `URL` field, then click `OK`. Finally, select the just added repository in the upper list,
-and click `Use in the project` button, and then press `OK`.
-
 2. Select a version of the add-on which is compatible with the platform version used in your project:
 
 | Platform Version | Add-on Version | Coordinates
@@ -59,8 +53,7 @@ and click `Use in the project` button, and then press `OK`.
 
 The latest stable version is: `2.0.0`
 
-Add custom application component to your project. Using **CUBA Studio**, go to `PROJECT PROPERTIES` -> `Edit` and click `+` next to `Custom components`,
-then paste into the first field the appropriate coordinates for the desired version, picked from the table above.
+3. Install the correct add-on version in your project using **CUBA Studio**, or manually by editing your `build.gradle` file.
 
 **PLEASE NOTE** that new features are developed only in the latest releases, while only critical bug fixes
 are back-ported to older ones. Please update your CUBA version as soon as possible, if you are in need of
@@ -236,7 +229,7 @@ As you've noticed, the culprit here is to make sure you list *only* the changed 
 them at the end of the `firstColumn` element, but just make sure you set both `id` and `property`
 attributes if you plan to further extend your screen.
 
-If you used **CUBA Studio** to extend the screen, and customised the `fieldGroup`'s fields, you
+If you used **CUBA Studio 6** to extend the screen, and customised the `fieldGroup`'s fields, you
 could face a *duplicated id* error when loading the extended screen. This is due to Studio adding
 back **all** the fields in the `fieldGroup`, usually without the original ids.
 In that case, just open the XML file in your IDE, and edit it manually like outlined above.
