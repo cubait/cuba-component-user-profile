@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2017 Nexbit di Paolo Furini
  */
-package it.nexbit.cuba.security.userprofile;
+package it.nexbit.cuba.security.userprofile.web.screens;
 
 import com.haulmont.bali.util.ParamsMap;
 import com.haulmont.cuba.client.ClientConfig;
@@ -15,9 +15,17 @@ import com.haulmont.cuba.gui.components.actions.BaseAction;
 import com.haulmont.cuba.gui.data.Datasource;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.cuba.security.global.UserSession;
+import com.haulmont.cuba.web.App;
+import com.haulmont.cuba.web.security.ExternalUserCredentials;
+import com.haulmont.cuba.web.sys.WebUserSessionSource;
+import com.vaadin.server.VaadinSession;
 import it.nexbit.cuba.security.userprofile.app.UserProfileService;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ValidationException;
 import java.util.Map;
 
@@ -49,27 +57,9 @@ public class UserEditProfile extends AbstractWindow {
     @Inject
     protected UserProfileService userProfile;
 
-    @Inject
-    protected Companion companion;
-
-    protected EditorWindowDelegate delegate;
-
     @Override
+    @SuppressWarnings("unchecked")
     public void init(Map<String, Object> params) {
-        // get companion (defined in web block only, so provide some defaults for desktop)
-        if (companion == null) {
-            companion = new Companion() {
-                @Override
-                public Boolean isLoggedInWithExternalAuth() {
-                    return false;
-                }
-
-                @Override
-                public void pushUserSessionUpdate(UserSession userSession) {
-
-                }
-            };
-        }
 
         UserSession userSession = userSessionSource.getUserSession();
         User user = userSession.getUser();
@@ -78,14 +68,12 @@ public class UserEditProfile extends AbstractWindow {
                 .withHandler(event -> {
                     Window passwordDialog = openWindow("sec$User.changePassword", WindowManager.OpenType.DIALOG,
                             ParamsMap.of("currentPasswordRequired", true));
-                    passwordDialog.addCloseListener(actionId -> {
-                        // move focus back to window
-                        changePasswordBtn.requestFocus();
-                    });
+                    passwordDialog.getFrameOwner()
+                            .addAfterCloseListener(afterCloseEvent -> changePasswordBtn.focus());
                 }));
 
         if (!user.equals(userSession.getCurrentOrSubstitutedUser())
-                || companion.isLoggedInWithExternalAuth()) {
+                || ExternalUserCredentials.isLoggedInWithExternalAuth(userSession)) {
             changePasswordBtn.setEnabled(false);
         }
 
@@ -106,11 +94,9 @@ public class UserEditProfile extends AbstractWindow {
 
         userDs.setItem(userProfile.getProfile());
 
-        delegate = new EditorWindowDelegate(this);
-
-        final TextField firstNameField = (TextField) fieldGroup.getFieldNN("firstName").getComponentNN();
-        final TextField lastNameField = (TextField) fieldGroup.getFieldNN("lastName").getComponentNN();
-        final TextField nameField = (TextField) fieldGroup.getFieldNN("name").getComponentNN();
+        final TextField<String> firstNameField = (TextField<String>) fieldGroup.getFieldNN("firstName").getComponentNN();
+        final TextField<String> lastNameField = (TextField<String>) fieldGroup.getFieldNN("lastName").getComponentNN();
+        final TextField<String> nameField = (TextField<String>) fieldGroup.getFieldNN("name").getComponentNN();
         firstNameField.addValueChangeListener(e -> {
             String prevValue = (e.getPrevValue() != null ? e.getPrevValue() + " " : "");
             if (e.getValue() != null) {
@@ -153,11 +139,11 @@ public class UserEditProfile extends AbstractWindow {
 
     @Override
     protected void postValidate(ValidationErrors errors) {
-        delegate.validateAdditionalRules(errors);
+        validateAdditionalRules(errors);
     }
 
     protected void commitAndClose() {
-        if (delegate.isModified()) {
+        if (getDsContext() != null && getDsContext().isModified()) {
             if (!validateAll()) return;
 
             try {
@@ -179,7 +165,24 @@ public class UserEditProfile extends AbstractWindow {
     }
 
     protected void pushUserSessionUpdate(UserSession userSession) {
-        companion.pushUserSessionUpdate(userSession);
+        // IMPL NOTE: this code has been extracted (and adapted) from the WebUserSessionSource
+        //            class.  The original logic is for reading the current UserSession, the
+        //            following one is the same (reversed) logic to force an update.
+        if (App.isBound()) {
+            VaadinSession.getCurrent().setAttribute(UserSession.class, userSession);
+        } else {
+            SecurityContext securityContext = AppContext.getSecurityContextNN();
+            if (securityContext.getSession() == null) {
+                HttpServletRequest request = null;
+                RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+                if (requestAttributes instanceof ServletRequestAttributes) {
+                    request = ((ServletRequestAttributes) requestAttributes).getRequest();
+                }
+                if (request != null && request.getAttribute(WebUserSessionSource.REQUEST_ATTR) != null) {
+                    request.setAttribute(WebUserSessionSource.REQUEST_ATTR, userSession);
+                }
+            }
+        }
 
         // replace the current security context (if any) with a new one based on new session
         if (AppContext.getSecurityContext() != null)
@@ -190,25 +193,4 @@ public class UserEditProfile extends AbstractWindow {
         close(CLOSE_ACTION_ID);
     }
 
-    public interface Companion {
-        /**
-         * Check if the user has been authenticated with a user/password login mechanism (based
-         * on {@code LoginPasswordCredentials} credentials), or with an external one.
-         * Only in the former case the password for the user can be changed by the web client.
-         *
-         * @return {@code true} if the current UserSession was obtained from an external
-         *      authentication provider, {@code false} otherwise
-         */
-        Boolean isLoggedInWithExternalAuth();
-
-        /**
-         * Set the updated {@code userSession} in the current {@code VaadinSession} instance, so
-         * that subsequent invocations of {@link UserSessionSource#getUserSession()} will get the
-         * new instance.
-         *
-         * @param userSession the new {@code UserSession} object to set in the current
-         *                    {@code VaadinSession} and propagated in the middleware
-         */
-        void pushUserSessionUpdate(UserSession userSession);
-    }
 }

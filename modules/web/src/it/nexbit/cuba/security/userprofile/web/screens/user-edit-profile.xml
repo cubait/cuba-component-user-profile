@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
         caption="msg://profile.caption"
-        class="it.nexbit.cuba.security.userprofile.UserEditProfile"
+        class="it.nexbit.cuba.security.userprofile.web.screens.UserEditProfile"
         datasource="userDs"
         focusComponent="fieldGroup"
-        messagesPack="it.nexbit.cuba.security.userprofile">
+        messagesPack="it.nexbit.cuba.security.userprofile.web">
     <dsContext>
         <datasource id="userDs"
                     class="com.haulmont.cuba.security.entity.User"
                     view="_local"/>
     </dsContext>
-    <companions>
-        <web class="it.nexbit.cuba.security.userprofile.web.companions.UserEditProfileCompanion"/>
-    </companions>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="buttons"

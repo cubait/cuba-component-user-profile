@@ -1,6 +1,6 @@
 rootProject.name = 'sec-user-profile'
-include(':nxsecup-global', ':nxsecup-core', ':nxsecup-gui', ':nxsecup-web')
-project(':nxsecup-global').projectDir = new File(settingsDir, 'modules/global')
-project(':nxsecup-core').projectDir = new File(settingsDir, 'modules/core')
-project(':nxsecup-gui').projectDir = new File(settingsDir, 'modules/gui')
-project(':nxsecup-web').projectDir = new File(settingsDir, 'modules/web')
+def modulePrefix = 'nxsecup'
+include(":${modulePrefix}-global" , ":${modulePrefix}-core", ":${modulePrefix}-web" )
+project(":${modulePrefix}-global" ).projectDir = new File(settingsDir, 'modules/global')
+project(":${modulePrefix}-core" ).projectDir = new File(settingsDir, 'modules/core')
+project(":${modulePrefix}-web" ).projectDir = new File(settingsDir, 'modules/web')

@@ -2,6 +2,10 @@
 
 All releases are documented here. This project follows *Semantic Versioning* principles.
 
+## [2.0.0] - 2019-08-22
+
+- Support for CUBA 7.0
+
 ## [1.1.0] - 2018-12-01
 
 - Support for CUBA 6.10

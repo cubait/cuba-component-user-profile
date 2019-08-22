@@ -7,5 +7,7 @@
             template="it/nexbit/cuba/security/userprofile/web/screens/nexbit-settings-window.xml">
         <param name="changeThemeEnabled" value="false"/>
     </screen>
+    <screen id="userProfile"
+            template="it/nexbit/cuba/security/userprofile/web/screens/user-edit-profile.xml"/>
 
 </screen-config>

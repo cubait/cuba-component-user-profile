@@ -1,5 +1,4 @@
 [![license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
-[![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
 [![Generic badge](https://img.shields.io/badge/API%20docs-HERE-orange.svg)][2]
 [![Run in Postman](https://run.pstmn.io/button.svg)][1]
 
@@ -56,8 +55,9 @@ and click `Use in the project` button, and then press `OK`.
 | 6.8.*            | 0.3.0          | it.nexbit.cuba.security.userprofile:nxsecup-global:0.3.0
 | 6.9.*            | 1.0.0          | it.nexbit.cuba.security.userprofile:nxsecup-global:1.0.0
 | 6.10.*           | 1.1.0          | it.nexbit.cuba.security.userprofile:nxsecup-global:1.1.0
+| 7.0.*            | 2.0.0          | it.nexbit.cuba.security.userprofile:nxsecup-global:2.0.0
 
-The latest stable version is: `1.1.0`
+The latest stable version is: `2.0.0`
 
 Add custom application component to your project. Using **CUBA Studio**, go to `PROJECT PROPERTIES` -> `Edit` and click `+` next to `Custom components`,
 then paste into the first field the appropriate coordinates for the desired version, picked from the table above.
