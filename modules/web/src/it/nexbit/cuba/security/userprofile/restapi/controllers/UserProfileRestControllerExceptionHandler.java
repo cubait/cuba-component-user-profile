@@ -1,9 +1,9 @@
 package it.nexbit.cuba.security.userprofile.restapi.controllers;
 
+import com.haulmont.addon.restapi.api.controllers.RestControllerExceptionHandler;
+import com.haulmont.addon.restapi.api.exception.ConstraintViolationInfo;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.MessageTools;
-import com.haulmont.restapi.controllers.RestControllerExceptionHandler;
-import com.haulmont.restapi.exception.ConstraintViolationInfo;
 import it.nexbit.cuba.security.userprofile.restapi.data.NavigableConstraint;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
@@ -67,7 +67,7 @@ public class UserProfileRestControllerExceptionHandler extends RestControllerExc
             if (invalidValue != null) {
                 Class<?> invalidValueClass = invalidValue.getClass();
                 boolean serializable = false;
-                for (Class serializableType : serializableInvalidValueTypes) {
+                for (Class serializableType : SERIALIZABLE_INVALID_VALUE_TYPES) {
                     //noinspection unchecked
                     if (serializableType.isAssignableFrom(invalidValueClass)) {
                         serializable = true;

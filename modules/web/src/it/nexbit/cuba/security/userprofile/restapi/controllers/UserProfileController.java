@@ -1,6 +1,6 @@
 package it.nexbit.cuba.security.userprofile.restapi.controllers;
 
-import com.haulmont.restapi.service.ServicesControllerManager;
+import com.haulmont.addon.restapi.api.service.ServicesControllerManager;
 import it.nexbit.cuba.security.userprofile.restapi.data.PasswordInfo;
 import it.nexbit.cuba.security.userprofile.restapi.services.UserProfileControllerManager;
 import org.springframework.http.HttpStatus;

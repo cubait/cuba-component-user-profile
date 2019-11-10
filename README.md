@@ -2,9 +2,9 @@
 [![Generic badge](https://img.shields.io/badge/API%20docs-HERE-orange.svg)][2]
 [![Run in Postman](https://run.pstmn.io/button.svg)][1]
 
-# CUBA User Profile Component
+# CUBA User Profile Add-on
 
-This application component gives the following features once added to a CUBA project:
+This add-on gives the following features once added to a CUBA project:
 
 - Provides a `UserProfileService` with methods for getting and updating the details of the current logged in user (what I call the _user profile_)
 - Exposes a new REST API endpoint (_Richardson Maturity Model - Level 2_ compliant), called `/rest/nxsecup/v1/userProfile` supporting GET (`getProfile`)
@@ -12,6 +12,9 @@ and PUT (`updateProfile`) requests, and a `/rest/nxsecup/v1/userProfile/password
 requests for updating the user's password
 - Adds a `userProfile` screen, and corresponding menu item after the Settings one in the Help main menu
 - Optionally hides the _Change password_ button from the `Settings` screen (because that button is replicated in the `userProfile` screen)
+
+**UPDATE FOR CUBA >= 7.1**: This add-on adds a dependency to the [REST API add-on](https://www.cuba-platform.com/marketplace/rest-api/)
+once added to your project.
 
 ## Installation
 
@@ -50,8 +53,9 @@ buildscript {
 | 6.9.*            | 1.0.0          | it.nexbit.cuba.security.userprofile:nxsecup-global:1.0.0
 | 6.10.*           | 1.1.0          | it.nexbit.cuba.security.userprofile:nxsecup-global:1.1.0
 | 7.0.*            | 2.0.0          | it.nexbit.cuba.security.userprofile:nxsecup-global:2.0.0
+| 7.1.*            | 3.0.0          | it.nexbit.cuba.security.userprofile:nxsecup-global:3.0.0
 
-The latest stable version is: `2.0.0`
+The latest stable version is: `3.0.0`
 
 3. Install the correct add-on version in your project using **CUBA Studio**, or manually by editing your `build.gradle` file.
 
@@ -195,44 +199,6 @@ the actual requests in your project):
 
 The `user-edit-profile` screen can be extended in the usual CUBA way, so that you can add/remove/alter
 the `User` entity fields exposed to the user.
-
-Please bear in mind that the screen uses a `FieldGroup` component to display the `User`'s fields, and
-that requires special attention when extending the screen.
-
-The following is a sample extended screen, where the `email` field has been made **not** required 
-(the `user-edit-profile` screen marks this field required by default, as that's what I need in all
-of my projects):
-
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        class="com.company.testuserprofile.web.screens.ExtUserEditProfile"
-        extends="/it/nexbit/cuba/security/userprofile/user-edit-profile.xml"
-        messagesPack="com.company.testuserprofile.web.screens">
-    <layout>
-        <groupBox id="groupBox">
-            <scrollBox id="scrollBox">
-                <fieldGroup id="fieldGroup">
-                    <column id="firstColumn">
-                        <field id="email"
-                               required="false"/>
-                    </column>
-                </fieldGroup>
-            </scrollBox>
-        </groupBox>
-    </layout>
-</window>
-```
-
-As you've noticed, the culprit here is to make sure you list *only* the changed fields in the 
-`fieldGroup` component, by referring to them explicitly by id. To add new fields, just append
-them at the end of the `firstColumn` element, but just make sure you set both `id` and `property`
-attributes if you plan to further extend your screen.
-
-If you used **CUBA Studio 6** to extend the screen, and customised the `fieldGroup`'s fields, you
-could face a *duplicated id* error when loading the extended screen. This is due to Studio adding
-back **all** the fields in the `fieldGroup`, usually without the original ids.
-In that case, just open the XML file in your IDE, and edit it manually like outlined above.
 
 [1]: https://app.getpostman.com/run-collection/da701a9750c75da9ab02#?env%5Bsec-user-profile%20TEST%5D=W3sia2V5IjoiYmFzZXVybCIsInZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FwcC9yZXN0IiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0=
 [2]: https://documenter.getpostman.com/view/48162/collection/RW1VqMDm

@@ -2,6 +2,11 @@
 
 All releases are documented here. This project follows *Semantic Versioning* principles.
 
+## [3.0.0] - 2019-11-10
+
+- Support for CUBA 7.1
+- Refactored the user-edit-profile screen using the new API
+
 ## [2.0.0] - 2019-08-22
 
 - Support for CUBA 7.0

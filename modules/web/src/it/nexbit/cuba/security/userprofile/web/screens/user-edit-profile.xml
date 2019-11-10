@@ -1,45 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://profile.caption"
-        class="it.nexbit.cuba.security.userprofile.web.screens.UserEditProfile"
-        datasource="userDs"
-        focusComponent="fieldGroup"
         messagesPack="it.nexbit.cuba.security.userprofile.web">
-    <dsContext>
-        <datasource id="userDs"
-                    class="com.haulmont.cuba.security.entity.User"
-                    view="_local"/>
-    </dsContext>
-    <dialogMode height="600"
-                width="800"/>
+    <data>
+        <instance id="userDc" class="com.haulmont.cuba.security.entity.User" view="_local"/>
+    </data>
     <layout expand="buttons"
             spacing="true">
         <groupBox id="groupBox"
                   spacing="true">
             <scrollBox id="scrollBox"
                        orientation="vertical">
-                <fieldGroup id="fieldGroup"
-                            datasource="userDs">
-                    <column id="firstColumn"
-                            width="250px">
-                        <field id="login"
-                               editable="false"
-                               property="login"/>
-                        <field id="email"
-                               property="email"
+                <form id="profileForm" dataContainer="userDc">
+                    <textField property="login"
+                               editable="false"/>
+                    <textField property="email"
                                required="true"
                                requiredMessage="msg://profile.emailRequired">
-                            <validator
-                                    class="com.haulmont.cuba.gui.components.validators.EmailValidator"/>
-                        </field>
-                        <field id="firstName" property="firstName"/>
-                        <field id="lastName" property="lastName"/>
-                        <field id="name"
+                        <validator class="com.haulmont.cuba.gui.components.validators.EmailValidator"/>
+                    </textField>
+                    <textField id="firstNameField" property="firstName"/>
+                    <textField id="lastNameField" property="lastName"/>
+                    <textField id="nameField"
                                property="name"
                                required="true"
                                requiredMessage="msg://profile.nameRequired"/>
-                    </column>
-                </fieldGroup>
+                </form>
                 <grid id="grid"
                       margin="true,false,false,false"
                       spacing="true"
@@ -66,6 +52,7 @@
                 <button id="okBtn"
                         icon="icons/ok.png"/>
                 <button id="cancelBtn"
+                        caption="mainMsg://actions.Cancel"
                         icon="icons/cancel.png"/>
             </buttonsPanel>
         </vbox>

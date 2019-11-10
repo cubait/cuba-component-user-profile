@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
-
-    <include file="it/nexbit/cuba/security/userprofile/screens.xml"/>
-
     <screen id="settings"
             template="it/nexbit/cuba/security/userprofile/web/screens/nexbit-settings-window.xml">
         <param name="changeThemeEnabled" value="false"/>
     </screen>
-    <screen id="userProfile"
-            template="it/nexbit/cuba/security/userprofile/web/screens/user-edit-profile.xml"/>
-
 </screen-config>

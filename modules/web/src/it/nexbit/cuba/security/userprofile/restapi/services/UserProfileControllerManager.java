@@ -1,5 +1,7 @@
 package it.nexbit.cuba.security.userprofile.restapi.services;
 
+import com.haulmont.addon.restapi.api.exception.RestAPIException;
+import com.haulmont.addon.restapi.api.service.ServicesControllerManager;
 import com.haulmont.chile.core.model.MetaClass;
 import com.haulmont.cuba.core.app.serialization.EntitySerializationAPI;
 import com.haulmont.cuba.core.app.serialization.EntitySerializationOption;
@@ -11,8 +13,6 @@ import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.core.global.validation.CustomValidationException;
 import com.haulmont.cuba.security.app.UserManagementService;
 import com.haulmont.cuba.security.entity.User;
-import com.haulmont.restapi.exception.RestAPIException;
-import com.haulmont.restapi.service.ServicesControllerManager;
 import it.nexbit.cuba.security.userprofile.app.UserProfileService;
 import it.nexbit.cuba.security.userprofile.restapi.data.PasswordInfo;
 import org.springframework.http.HttpStatus;

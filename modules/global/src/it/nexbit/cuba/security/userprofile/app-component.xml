@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
-               dependsOn="com.haulmont.cuba">
+               dependsOn="com.haulmont.cuba, com.haulmont.addon.restapi">
 
     <module name="global" blocks="*">
         <artifact name="nxsecup-global" appJar="true"/>
@@ -13,7 +13,6 @@
     </module>
     <module name="core" dependsOn="global" blocks="core">
         <artifact name="nxsecup-core" appJar="true"/>
-        <artifact name="nxsecup-core" classifier="db" ext="zip" configuration="dbscripts"/>
 
         <property name="cuba.springContextConfig"
                   value="+it/nexbit/cuba/security/userprofile/spring.xml"/>
